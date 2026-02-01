@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body { font-family: 'Inter', sans-serif; }
+
+.bg-herbal-green { background-color: #43b02a; }
+
+.text-herbal-green { color: #43b02a; }
+
+.card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+
+
+@media print {
+
+@page { size: A4; margin: 1cm; }
+
+body { background-color: white; padding: 0; }
+
+.no-print { display: none !important; }
+
+.card-shadow { box-shadow: none !important; border: none !important; }
+
+.max-w-4xl { max-width: 100% !important; margin: 0 !important; }
+
+main { padding: 0 !important; }
+
+section { break-inside: avoid; }
+
+}
+
+
+
+.action-btn { transition: all 0.2s; }
+
+.action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+
+
+/* Spinner per caricamento AI */
+
+.loader {
+
+border: 3px solid #f3f3f3;
+
+border-top: 3px solid #43b02a;
+
+border-radius: 50%;
+
+width: 20px;
+
+height: 20px;
+
+animation: spin 1s linear infinite;
+
+display: inline-block;
+
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+</style>
+
+</head>
+
+<body class="bg-gray-100 text-gray-800 antialiased p-4 md:p-8">
+
+
+
+<!-- Barra delle Azioni -->
+
+<div class="max-w-4xl mx-auto mb-6 flex justify-between items-center no-print">
+
+<h2 class="text-sm font-bold uppercase tracking-widest text-gray-500">Wellness Dashboard</h2>
+
+<button onclick="window.print()" class="action-btn flex items-center gap-2 bg-white text-gray-700 px-6 py-2.5 rounded-full font-semibold shadow-md border border-gray-200">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+
+Stampa PDF
+
+</button>
+
+</div>
+
+
+
+<div class="max-w-4xl mx-auto bg-white rounded-3xl overflow-hidden card-shadow mb-8">
+
+
+<!-- Header -->
+
+<header class="bg-herbal-green p-8 text-center text-white">
+
+<h1 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight">Il Tuo Percorso verso il Benessere</h1>
+
+<p class="mt-2 text-lg opacity-90 font-light italic">Energia, Nutrimento e Vitalità ogni giorno</p>
+
+</header>
+
+
+
+<main class="p-6 md:p-10 space-y-10">
+
+
+
+<!-- Sezione AI: Assistente Benessere (NUOVA) -->
+
+<section class="bg-gradient-to-br from-green-50 to-white p-6 rounded-3xl border border-green-100 no-print">
+
+<div class="flex items-center gap-3 mb-6">
+
+<div class="text-3xl">✨</div>
+
+<div>
+
+<h2 class="text-xl font-bold text-gray-800">Assistente Benessere Intelligente</h2>
+
+<p class="text-xs text-gray-500 italic">Chiedi consigli su ricette, snack o motivazione</p>
+
+</div>
+
+</div>
+
+
+
+<div class="space-y-4">
+
+<div class="flex flex-wrap gap-2">
+
+<button onclick="askAI('Suggeriscimi uno snack sano con yogurt e frutta')" class="text-xs bg-white border border-green-200 text-green-700 px-3 py-1.5 rounded-full hover:bg-green-50 transition-colors">Snack veloce ✨</button>
+
+<button onclick="askAI('Dammi un consiglio per non mollare il mio percorso di benessere oggi')" class="text-xs bg-white border border-green-200 text-green-700 px-3 py-1.5 rounded-full hover:bg-green-50 transition-colors">Motivami! ✨</button>
+
+<button onclick="askAI('Come posso bere più acqua durante il giorno?')" class="text-xs bg-white border border-green-200 text-green-700 px-3 py-1.5 rounded-full hover:bg-green-50 transition-colors">Trucchi Idratazione ✨</button>
+
+</div>
+
+
+<div class="relative">
+
+<textarea id="aiInput" placeholder="Inserisci qui la tua domanda o i tuoi ingredienti..." class="w-full p-4 pr-12 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-herbal-green focus:border-transparent outline-none text-sm transition-all" rows="2"></textarea>
+
+<button onclick="handleManualQuery()" class="absolute right-3 bottom-3 bg-herbal-green text-white p-2 rounded-xl hover:opacity-90 transition-opacity">
+
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+
+</button>
+
+</div>
+
+
+
+<div id="aiResponse" class="hidden p-4 bg-white border border-gray-100 rounded-2xl text-sm leading-relaxed text-gray-700 shadow-sm">
+
+<!-- Qui comparirà la risposta dell'AI -->
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Sezione 1: La Routine Mattutina -->
+
+<section>
+
+<div class="flex items-center gap-3 mb-6">
+
+<div class="bg-herbal-green text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+
+<h2 class="text-2xl font-bold text-herbal-green uppercase tracking-wide">La Colazione Equilibrata</h2>
+
+</div>
+
+
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+<!-- Step 1: Aloe -->
+
+<div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
+
+<div class="h-40 flex items-center justify-center mb-4">
+
+<img src="Gemini_Generated_Image_k6csoxk6csoxk6cs.jpg" alt="Aloe Drink" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=Aloe'">
+
+</div>
+
+<h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">1. Idratazione (Aloe)</h3>
+
+<p class="text-sm leading-relaxed text-gray-600">
+
+<strong>3 TAPPINI</strong> in un bicchiere d'acqua.<br>
+
+<span class="text-xs italic mt-1 block">(Conservare in frigo dopo l'apertura)</span>
+
+</p>
+
+</div>
+
+
+
+<!-- Step 2: Infuso -->
+
+<div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
+
+<div class="h-40 flex items-center justify-center mb-4">
+
+<img src="Infuso.jpg" alt="Infuso" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=Infuso'">
+
+</div>
+
+<h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">2. Energia (Infuso)</h3>
+
+<p class="text-sm leading-relaxed text-gray-600">
+
+<strong>½ CUCCHIAINO</strong> in una tazza di acqua calda o in 1,5 litri d'acqua.
+
+</p>
+
+</div>
+
+
+
+<!-- Step 3: Formula 1 -->
+
+<div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
+
+<div class="h-40 flex items-center justify-center mb-4">
+
+<img src="Formula 1 .jpg" alt="Formula 1" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=Formula+1'">
+
+</div>
+
+<h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">3. Nutrizione (F1)</h3>
+
+<p class="text-sm leading-relaxed text-gray-600">
+
+<strong>2 cucchiai F1 + 1 PDM</strong> in 250ml di acqua, latte vegetale o yogurt.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Sezione 2: Obiettivi Personalizzati -->
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+<div class="p-6 bg-white rounded-2xl border-2 border-dashed border-gray-200">
+
+<h3 class="text-gray-900 font-bold text-xl mb-3 flex items-center gap-2 text-blue-600">⚖️ Controllo Peso</h3>
+
+<p class="text-sm text-gray-600 leading-relaxed">
+
+Sostituisci <strong>2 pasti al giorno</strong>:<br>
+
+• COLAZIONE + un PASTO PRINCIPALE.
+
+</p>
+
+</div>
+
+<div class="p-6 bg-white rounded-2xl border-2 border-dashed border-gray-200">
+
+<h3 class="text-gray-900 font-bold text-xl mb-3 flex items-center gap-2 text-orange-600">💪 Massa Magra</h3>
+
+<p class="text-sm text-gray-600 leading-relaxed">
+
+Consuma <strong>3 frullati al giorno</strong>:<br>
+
+• COLAZIONE + 1 ora dopo PRANZO e CENA.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- Sezione 3: Snack e Pomeriggio -->
+
+<section class="bg-gray-50 p-8 rounded-3xl border border-gray-200 relative overflow-hidden">
+
+<div class="flex items-center gap-3 mb-6 relative z-10">
+
+<div class="bg-herbal-green text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+
+<h2 class="text-2xl font-bold text-gray-800 uppercase tracking-wide">Snack e Pomeriggio</h2>
+
+</div>
+
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
+
+<div>
+
+<p class="text-gray-700 mb-4 font-semibold text-sm">L'Infuso pomeridiano: mantiene attivo il metabolismo.</p>
+
+<div class="flex justify-center md:justify-start">
+
+<img src="pdm.jpg" alt="PDM Snack" class="w-40 h-40 object-contain rounded-2xl bg-white p-2 shadow-sm" onerror="this.src='https://via.placeholder.com/150?text=PDM'">
+
+</div>
+
+</div>
+
+<div>
+
+<h4 class="font-bold text-herbal-green mb-3 uppercase text-xs tracking-widest">Opzioni Snack Sani:</h4>
+
+<ul class="space-y-2 text-sm text-gray-600">
+
+<li>✔️ Formaggio grana (30g)</li>
+
+<li>✔️ Frutta secca (6-7 mandorle)</li>
+
+<li>✔️ Yogurt greco magro</li>
+
+<li>✔️ Crackers integrali</li>
+
+<li>✔️ Barrette proteiche Herbalife</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- Sezione 4: Regole d'oro -->
+
+<section class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+
+<div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+
+<div class="text-2xl mb-1">💧</div>
+
+<p class="text-[10px] font-bold uppercase text-gray-400">Idratazione</p>
+
+<p class="text-xs font-semibold">2L Acqua</p>
+
+</div>
+
+<div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+
+<div class="text-2xl mb-1">🏃</div>
+
+<p class="text-[10px] font-bold uppercase text-gray-400">Attività</p>
+
+<p class="text-xs font-semibold">30 min al giorno</p>
+
+</div>
+
+<div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+
+<div class="text-2xl mb-1">🥗</div>
+
+<p class="text-[10px] font-bold uppercase text-gray-400">Cibo</p>
+
+<p class="text-xs font-semibold">Fresco e sano</p>
+
+</div>
+
+<div class="p-4 bg-gray-50 rounded-2xl border border-gray-100">
+
+<div class="text-2xl mb-1">✨</div>
+
+<p class="text-[10px] font-bold uppercase text-gray-400">Successo</p>
+
+<p class="text-xs font-semibold">Costanza</p>
+
+</div>
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- Footer -->
+
+<footer class="bg-gray-900 p-8 text-center text-white">
+
+<p class="text-xl font-bold mb-2">Senti subito la differenza!</p>
+
+<p class="text-[10px] opacity-40 uppercase tracking-widest">© Wellness Plan - Supportato da AI ✨</p>
+
+</footer>
+
+
+
+</div>
+
+
+
+<!-- Script Logica Gemini AI -->
+
+<script>
+
+const apiKey = ""; // La chiave viene fornita dall'ambiente di esecuzione
+
+
+
+async function askAI(prompt) {
+
+const responseContainer = document.getElementById('aiResponse');
+
+const aiInput = document.getElementById('aiInput');
+
+
+responseContainer.innerHTML = '<div class="flex items-center gap-2 text-gray-500"><div class="loader"></div> Elaborazione consiglio personalizzato...</div>';
+
+responseContainer.classList.remove('hidden');
+
+
+const systemPrompt = "Sei un assistente esperto di benessere e nutrizione per clienti che usano prodotti Herbalife. Fornisci risposte brevi, incoraggianti e pratiche in italiano. Se l'utente chiede ricette o snack, suggerisci opzioni sane che si integrano bene con un percorso di perdita peso o massa magra.";
+
+
+
+try {
+
+let success = false;
+
+let resultText = "";
+
+let delay = 1000;
+
+
+
+for (let i = 0; i < 5; i++) {
+
+try {
+
+const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+
+method: 'POST',
+
+headers: { 'Content-Type': 'application/json' },
+
+body: JSON.stringify({
+
+contents: [{ parts: [{ text: prompt }] }],
+
+systemInstruction: { parts: [{ text: systemPrompt }] }
+
+})
+
+});
+
+
+
+if (!response.ok) throw new Error('API Error');
+
+
+
+const data = await response.json();
+
+resultText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+success = true;
+
+break;
+
+} catch (e) {
+
+await new Promise(resolve => setTimeout(resolve, delay));
+
+delay *= 2;
+
+}
+
+}
+
+
+
+if (success) {
+
+// Formattazione semplice del testo (bold e nuovi paragrafi)
+
+const formatted = resultText
+
+.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+
+.replace(/\n/g, '<br>');
+
+responseContainer.innerHTML = `<div class="prose prose-sm max-w-none">${formatted}</div>`;
+
+} else {
+
+responseContainer.innerHTML = '<span class="text-red-500">Ops! Si è verificato un errore durante la connessione. Riprova più tardi.</span>';
+
+}
+
+} catch (err) {
+
+responseContainer.innerHTML = '<span class="text-red-500">Errore di sistema. Riprova.</span>';
+
+}
+
+}
+
+
+
+function handleManualQuery() {
+
+const input = document.getElementById('aiInput');
+
+if (input.value.trim()) {
+
+askAI(input.value.trim());
+
+input.value = "";
+
+}
+
+}
+
+
+
+// Gestione Enter per l'input manuale
+
+document.getElementById('aiInput').addEventListener('keypress', function (e) {
+
+if (e.key === 'Enter' && !e.shiftKey) {
+
+e.preventDefault();
+
+handleManualQuery();
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
