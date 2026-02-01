@@ -96,7 +96,7 @@
                     <!-- Aloe -->
                     <div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
                         <div class="h-40 flex items-center justify-center mb-4">
-                            <img src="aloe.png" alt="Aloe Drink" class="h-full object-contain" onerror="this.style.display='none'">
+                            <img src="aloe.png" alt="Aloe Drink" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=Aloe'">
                         </div>
                         <h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">1. Idratazione (Aloe)</h3>
                         <p class="text-sm leading-relaxed text-gray-600">
@@ -108,8 +108,7 @@
                     <!-- Infuso -->
                     <div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
                         <div class="h-40 flex items-center justify-center mb-4">
-                            <!-- Nota: Il nome del file su GitHub è Infuso.png con la I maiuscola -->
-                            <img src="Infuso.png" alt="Infuso" class="h-full object-contain" onerror="this.style.display='none'">
+                            <img src="Infuso.png" alt="Infuso" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/200?text=Infuso'">
                         </div>
                         <h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">2. Energia (Infuso)</h3>
                         <p class="text-sm leading-relaxed text-gray-600">
@@ -117,11 +116,11 @@
                         </p>
                     </div>
 
-                    <!-- F1 + PDM insieme -->
+                    <!-- F1 + PDM insieme (Ottimizzato per bilanciamento) -->
                     <div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
-                        <div class="h-40 flex items-center justify-center mb-4 gap-2 px-2">
-                            <img src="formula-1.png" alt="Formula 1" class="h-full w-1/2 object-contain" onerror="this.style.display='none'">
-                            <img src="pdm.png" alt="PDM" class="h-full w-1/2 object-contain" onerror="this.style.display='none'">
+                        <div class="h-40 flex items-center justify-center mb-4 gap-1 px-1">
+                            <img src="formula-1.png" alt="Formula 1" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/100?text=F1'">
+                            <img src="pdm.png" alt="PDM" class="h-full object-contain" onerror="this.src='https://via.placeholder.com/100?text=PDM'">
                         </div>
                         <h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">3. Nutrizione (F1 + PDM)</h3>
                         <p class="text-sm leading-relaxed text-gray-600">
@@ -160,7 +159,7 @@
                     <div>
                         <p class="text-gray-700 mb-4 font-semibold text-sm">Proteine e idratazione: fondamentali per non arrivare affamati a cena.</p>
                         <div class="flex justify-center md:justify-start">
-                            <img src="barretta.png" alt="Barretta Snack" class="w-48 h-48 object-contain rounded-2xl bg-white p-2 shadow-sm" onerror="this.style.display='none'">
+                            <img src="barretta.png" alt="Barretta Snack" class="w-48 h-48 object-contain rounded-2xl bg-white p-2 shadow-sm" onerror="this.src='https://via.placeholder.com/200?text=Barretta'">
                         </div>
                     </div>
                     <div>
@@ -203,13 +202,11 @@
 
         <footer class="bg-gray-900 p-8 text-center text-white">
             <p class="text-xl font-bold mb-2">Senti subito la differenza!</p>
-            <p class="text-[10px] opacity-40 uppercase tracking-widest">© Benessere Hub - La Tua Guida Personale ✨</p>
         </footer>
 
     </div>
 
     <script>
-        // La chiave viene gestita automaticamente dall'ambiente di esecuzione.
         const apiKey = "";
 
         async function askAI(prompt) {
