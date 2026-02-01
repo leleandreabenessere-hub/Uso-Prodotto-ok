@@ -1,6 +1,167 @@
 <!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Il Tuo Percorso verso il Benessere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-herbal-green { background-color: #43b02a; }
+        .text-herbal-green { color: #43b02a; }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1); }
+        
+        @media print {
+            @page { size: A4; margin: 1cm; }
+            body { background-color: white; padding: 0; }
+            .no-print { display: none !important; }
+            .card-shadow { box-shadow: none !important; border: none !important; }
+            .max-w-4xl { max-width: 100% !important; margin: 0 !important; }
+            main { padding: 0 !important; }
+            section { break-inside: avoid; }
+        }
+
+        .action-btn { transition: all 0.2s; }
+        .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800 antialiased p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto mb-6 flex justify-between items-center no-print">
+        <h2 class="text-sm font-bold uppercase tracking-widest text-gray-500">Wellness Dashboard</h2>
+        <button onclick="window.print()" class="action-btn flex items-center gap-2 bg-white text-gray-700 px-6 py-2.5 rounded-full font-semibold shadow-md border border-gray-200">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            Stampa / Salva PDF
+        </button>
+    </div>
+
+    <div class="max-w-4xl mx-auto bg-white rounded-3xl overflow-hidden card-shadow mb-8">
+        
+        <header class="bg-herbal-green p-8 text-center text-white">
+            <h1 class="text-3xl md:text-4xl font-extrabold uppercase tracking-tight">Il Tuo Percorso verso il Benessere</h1>
+            <p class="mt-2 text-lg opacity-90 font-light italic">Energia, Nutrimento e Vitalità ogni giorno</p>
+        </header>
+
+        <main class="p-6 md:p-10 space-y-10">
+
+            <section>
+                <div class="flex items-center gap-3 mb-6 border-b pb-4 border-gray-100">
+                    <div class="bg-herbal-green text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl">1</div>
+                    <h2 class="text-2xl font-bold text-herbal-green uppercase tracking-wide">La Colazione Equilibrata</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
+                        <div class="h-40 flex items-center justify-center mb-4">
+                            <img src="Aloe.png" alt="Aloe Drink" class="h-full object-contain">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">1. Idratazione (Aloe)</h3>
+                        <p class="text-sm leading-relaxed text-gray-600">
+                            <strong>3 TAPPINI</strong> in un bicchiere d'acqua.<br>
+                            <span class="text-xs italic mt-1 block">(Conservare in frigo dopo l'apertura)</span>
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
+                        <div class="h-40 flex items-center justify-center mb-4">
+                            <img src="Infuso.png" alt="Infuso" class="h-full object-contain">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">2. Energia (Infuso)</h3>
+                        <p class="text-sm leading-relaxed text-gray-600">
+                            <strong>½ CUCCHIAINO</strong> in una tazza di acqua calda o in 1,5 litri d'acqua.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center p-4 border border-gray-100 rounded-2xl bg-gray-50">
+                        <div class="h-40 flex items-center justify-center mb-4">
+                            <img src="Formula 1 .png" alt="Formula 1" class="h-full object-contain">
+                        </div>
+                        <h3 class="font-bold text-lg mb-2 text-herbal-green uppercase text-sm tracking-wide">3. Nutrizione (F1)</h3>
+                        <p class="text-sm leading-relaxed text-gray-600">
+                            <strong>2 cucchiai F1 + 1 PDM</strong> in 250ml di acqua o latte vegetale.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-blue-50 rounded-2xl border border-blue-100">
+                    <h3 class="text-blue-700 font-bold text-xl mb-3 flex items-center gap-2">⚖️ Controllo Peso</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        Sostituisci <strong>2 pasti al giorno</strong>:<br>
+                        • COLAZIONE + un PASTO PRINCIPALE (Pranzo o Cena).
+                    </p>
+                </div>
+                <div class="p-6 bg-orange-50 rounded-2xl border border-orange-100">
+                    <h3 class="text-orange-700 font-bold text-xl mb-3 flex items-center gap-2">💪 Massa Magra</h3>
+                    <p class="text-sm text-gray-700 leading-relaxed">
+                        Consuma <strong>3 frullati al giorno</strong>:<br>
+                        • COLAZIONE + 1 ora dopo PRANZO e CENA.
+                    </p>
+                </div>
+            </section>
+
+            <section class="bg-gray-50 p-8 rounded-3xl border border-gray-200">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-herbal-green text-white w-10 h-10 rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                    <h2 class="text-2xl font-bold text-gray-800 uppercase tracking-wide">Snack e Pomeriggio</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <p class="text-gray-700 mb-4 font-semibold text-sm">Proteine e idratazione: fondamentali per non arrivare affamati a cena.</p>
+                        <div class="flex justify-center md:justify-start">
+                            <img src="pdm.png" alt="PDM Snack" class="w-40 h-40 object-contain rounded-2xl bg-white p-2 shadow-sm">
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-herbal-green mb-3 uppercase text-xs tracking-widest">Opzioni Snack Sani:</h4>
+                        <ul class="space-y-2 text-sm text-gray-600">
+                            <li>✔️ 1 Frutto + 5-6 Mandorle</li>
+                            <li>✔️ Yogurt greco magro</li>
+                            <li>✔️ Barretta proteica Herbalife</li>
+                            <li>✔️ Hummus con verdure crude</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="p-4 bg-white rounded-2xl border border-gray-200">
+                    <div class="text-2xl mb-1">💧</div>
+                    <p class="text-[10px] font-bold uppercase text-gray-400">Idratazione</p>
+                    <p class="text-xs font-semibold">2L Acqua al giorno</p>
+                </div>
+                <div class="p-4 bg-white rounded-2xl border border-gray-200">
+                    <div class="text-2xl mb-1">🏃</div>
+                    <p class="text-[10px] font-bold uppercase text-gray-400">Attività</p>
+                    <p class="text-xs font-semibold">30 min Camminata</p>
+                </div>
+                <div class="p-4 bg-white rounded-2xl border border-gray-200">
+                    <div class="text-2xl mb-1">🥗</div>
+                    <p class="text-[10px] font-bold uppercase text-gray-400">Cibo</p>
+                    <p class="text-xs font-semibold">Piatto Equilibrato</p>
+                </div>
+                <div class="p-4 bg-white rounded-2xl border border-gray-200">
+                    <div class="text-2xl mb-1">✨</div>
+                    <p class="text-[10px] font-bold uppercase text-gray-400">Successo</p>
+                    <p class="text-xs font-semibold">Costanza Quotidiana</p>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="bg-gray-900 p-8 text-center text-white">
+            <p class="text-xl font-bold mb-2">Senti subito la differenza!</p>
+            <p class="text-[10px] opacity-40 uppercase tracking-widest">© Benessere Hub - La Tua Guida Personale</p>
+        </footer>
+
+    </div>
+
+</body>
+</html><html lang="it">
 
 <head>
 
